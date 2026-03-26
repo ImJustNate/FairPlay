@@ -1,0 +1,72 @@
+:root {
+    --primary: #4B4CCE; /* forest moss */
+    --secondary: #77035B; /* rusty spice */
+    --accent1: #9B94FD; /* golden sand */
+    --accent2: #9C1C76; /* olive green */
+    --accent3: #0E5154; /* burnt caramel */
+    --light1: #cac7f4;
+
+
+    /* --- Layout Constants --- */
+    --border-radius: 8px;
+    --container-width: 1200px;
+
+    /* Fonts */
+    --font-main: "Noto Sans", sans-serif;
+    /*font weight*/
+    --fw-normal: 400;
+    --fw-bold: 700;
+    --font-optical-sizing: auto;
+    --font-variation-wdth: 100;
+    body {
+        font-family: var(--font-main);
+        font-optical-sizing: var(--font-optical-sizing);
+        font-variation-settings: "wdth" var(--font-variation-wdth);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Use weight variables for consistency */
+    h1, h2, h3 {
+        font-weight: var(--fw-bold);
+    }
+}
+.hidden {
+    display: none;
+}
+
+body {
+
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    background: black; 
+}
+
+header {
+    width: 89%;
+    height: 100%;
+    align-self: center;
+    
+    z-index: 10;
+}
+main {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: -10rem;
+    width: 90%;
+    height: 88vh;
+    justify-self: center;
+    align-self: center;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+}

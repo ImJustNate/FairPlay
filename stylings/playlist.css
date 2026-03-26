@@ -1,0 +1,86 @@
+
+.main-container {
+    display: flex;
+    flex-direction: column; /* Stack login and list vertically */
+    align-items: center;
+    justify-content: flex-start; /* Start from top so it doesn't float in middle */
+    min-height: 80vh; 
+    padding:20px 20px 0 20px;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    width: 97.5%;
+    border-radius: 15px;
+}
+
+
+.login-container {
+    width: 100%;
+    max-width: 500px;
+    height: 450px; 
+    
+    background-color: var(--accent1);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 13rem;
+
+}
+
+.music-container {
+    width: 100%;
+    max-width: 500px;
+    height: 450px; /* Force a fixed height to test scroll */
+    overflow-y: auto; /* Allow vertical scrolling */
+    overflow-x: hidden;
+    
+    background-color: var(--accent1);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 11rem;
+
+}
+
+/* Ensure the list fills the width so the scrollbar stays on the edge */
+#music-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.playlist-card {
+    background: var(--light1);
+    color: var(--primary);
+    font-size: 1.2em;
+
+    padding: 0.75rem;
+    margin: 12px 0;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+}
+
+.playlist-card:hover {
+    cursor: pointer;
+}
+
+.playlist-card img {
+    width: 64px;
+    height: 64px;
+    margin-right: 1rem;
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.playlist-info strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.playlist-info small {
+    color: #b3b3b3;
+}
+
