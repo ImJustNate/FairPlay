@@ -132,13 +132,14 @@ async function loadSongs(playlistId, accessToken) {
 
         // Build the HTML string first
         let htmlContent = "";
-        tracks.forEach((item, index) => { 
-            if (item && item.track) {
+        console.log(tracks)
+        tracks.forEach((entry, index) => { 
+            if (entry && entry.item) {
                 console.log("creating html")
                 // const trackName = tracks[i].track.name;
-                const trackName = item.track.name;
+                const trackName = entry.item.name;
                 // const artistName = tracks[i].track.artists[0].name;
-                const artistName = item.track.artists[0]?.name || "Unknown Artist";
+                const artistName = entry.item.artists?.[0]?.name || "Unknown Artist";
 
                 htmlContent += `
                     <p><strong>${index + 1}.</strong> ${trackName} - ${artistName}</p>
