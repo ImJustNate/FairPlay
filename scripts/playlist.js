@@ -97,6 +97,7 @@ async function fetchPlaylists(token) {
 }
 
 async function loadSongs(playlistId, accessToken) {
+    console.log("load songs")
     if (!accessToken) {
     console.error("No access token found");
     redirectToSpotify();
@@ -113,9 +114,11 @@ async function loadSongs(playlistId, accessToken) {
     let tracks = [];
     // Note: Ensure the URL uses the correct backticks for the variable template
     let nextUrl = `https://api.spotify.com/v1/playlists/${playlistId}/items?limit=100`;
+    console.log(nextUrl)
 
     try {
         while (nextUrl) {
+            console.log("loop")
             const response = await fetch(nextUrl, {
                 headers: { 'Authorization': `Bearer ${accessToken}` }
             });
@@ -131,6 +134,7 @@ async function loadSongs(playlistId, accessToken) {
         let htmlContent = "";
         tracks.forEach((item, index) => { 
             if (item && item.track) {
+                console.log("creating html")
                 // const trackName = tracks[i].track.name;
                 const trackName = item.track.name;
                 // const artistName = tracks[i].track.artists[0].name;
@@ -141,11 +145,15 @@ async function loadSongs(playlistId, accessToken) {
                 `;
             }
         });
+        
+        console.log(htmlContent)
+
         container.innerHTML = htmlContent || "<p>No tracks found.</p>";
 
     } catch (error) {
         console.error("Failed to load tracks:", error);
     }
+
 }
 
 
