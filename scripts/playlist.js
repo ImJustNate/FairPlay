@@ -132,6 +132,7 @@ async function loadSongs(playlistId, accessToken) {
 
         // Build the HTML string first
         let htmlContent = "";
+        const tracksData = []; 
         console.log(tracks)
         tracks.forEach((entry, index) => { 
             if (entry && entry.item) {
@@ -144,19 +145,24 @@ async function loadSongs(playlistId, accessToken) {
                     <p><strong>${index + 1}.</strong> ${trackName} - ${artistName}</p>
                 `;
                 const trackData = {
+                    index: index,
                     id: entry.id,
                     name: trackName,
                     artist: artistName,
                     album: albumName,
                     weight: 0
                 };
-                localStorage.setItem(`${index}`, JSON.stringify(trackData));
+                
+                tracksData.push(trackData);
             }
         });
-        
+        localStorage.setItem(playlistId, JSON.stringify(tracksData));
+
         console.log(htmlContent)
 
         container.innerHTML = htmlContent || "<p>No tracks found.</p>";
+
+        weightedRandomShuffel(JSON.stringify(tracksData));
 
     } catch (error) {
         console.error("Failed to load tracks:", error);
@@ -194,6 +200,64 @@ const renderPlaylists = (playlists, token) => {
     });
 };
 
+function weightedRandomShuffel(data){
+
+    if (typeof data === 'string') {
+        data = JSON.parse(data);
+    }
+
+    dataGroup0 = []
+    dataGroup1 = []
+    dataGroup2 = []
+    dataGroup3 = []
+    dataGroup4 = []
+    queue = []
+    
+    data.forEach(song => {
+        const group = song.index % 5;
+
+        if (group === 0) dataGroup0.push(song);
+        else if (group === 1) dataGroup1.push(song);
+        else if (group === 2) dataGroup2.push(song);
+        else if (group === 3) dataGroup3.push(song);
+        else if (group === 4) dataGroup4.push(song);
+    });
+
+    dataGroup0.sort((a, b) => b.weight - a.weight);
+    dataGroup1.sort((a, b) => b.weight - a.weight);
+    dataGroup2.sort((a, b) => b.weight - a.weight);
+    dataGroup3.sort((a, b) => b.weight - a.weight);
+    dataGroup4.sort((a, b) => b.weight - a.weight);
+
+    while (dataGroup0.length > 0){
+        queue.push(dataGroup0.shift());
+        if (dataGroup1.length > 0) queue.push(dataGroup1.shift());
+        if (dataGroup0.length > 0) queue.push(dataGroup0.shift());
+    }
+    
+    while (dataGroup1.length > 0){
+        queue.push(dataGroup1.shift());
+        if (dataGroup2.length > 0) queue.push(dataGroup2.shift());
+    }
+    
+    while (dataGroup2.length > 0){
+        queue.push(dataGroup2.shift());
+        if (dataGroup3.length > 0) queue.push(dataGroup3.shift());
+    }
+    
+    while (dataGroup3.length > 0){
+        queue.push(dataGroup3.shift());
+        if (dataGroup4.length > 0) queue.push(dataGroup4.shift());
+        if (dataGroup4.length > 0) queue.push(dataGroup4.shift());
+    }
+    while(dataGroup4.length > 0){
+        queue.push(dataGroup4.shift());
+    }
+
+    queue.forEach(song =>{
+        console.log(song.name)
+    })
+}
 
 const init = async () => {
     const urlParams = new URLSearchParams(window.location.search);
