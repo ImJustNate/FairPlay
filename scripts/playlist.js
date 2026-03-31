@@ -117,6 +117,23 @@ async function loadSongs(playlistId, accessToken) {
     console.log(nextUrl)
 
     try {
+        const cachedPlaylist = localStorage.getItem(playlistId);
+        
+        if (cachedPlaylist) {
+            console.log("Loading playlist from local storage...");
+            const cachedTracks = JSON.parse(cachedPlaylist);
+            
+            let htmlContent = "";
+            cachedTracks.forEach((track, index) => {
+                htmlContent += `<p><strong>${index + 1}.</strong> ${track.name} - ${track.artist}</p>`;
+            });
+            container.innerHTML = htmlContent;
+
+            let shuffled = weightedRandomShuffel(cachedPlaylist, playlistId)
+            await addToQueue(shuffled, accessToken);
+            return; 
+        }
+
         while (nextUrl) {
             console.log("loop")
             const response = await fetch(nextUrl, {
@@ -162,7 +179,9 @@ async function loadSongs(playlistId, accessToken) {
 
         container.innerHTML = htmlContent || "<p>No tracks found.</p>";
 
-        weightedRandomShuffel(JSON.stringify(tracksData));
+        let shuffled = weightedRandomShuffel(cachedPlaylist, playlistId)
+        await addToQueue(shuffled, accessToken);
+        return;
 
     } catch (error) {
         console.error("Failed to load tracks:", error);
@@ -200,7 +219,7 @@ const renderPlaylists = (playlists, token) => {
     });
 };
 
-function weightedRandomShuffel(data){
+function weightedRandomShuffel(data, playlistId, firstTime = false){
 
     if (typeof data === 'string') {
         data = JSON.parse(data);
@@ -254,9 +273,61 @@ function weightedRandomShuffel(data){
         queue.push(dataGroup4.shift());
     }
 
+    let place = 0
     queue.forEach(song =>{
+        place ++;
+        song.weight = Math.round((song.weight + place) / 2);
         console.log(song.name)
     })
+
+    localStorage.setItem(playlistId, JSON.stringify(queue));
+
+    if (firstTime){
+        return weightedRandomShuffel(queue, playlistId, false)
+    }
+    else{
+        return queue
+    }
+}
+
+
+async function addToQueue(data, accessToken) {
+    // We use a for...of loop for async/await to ensure order 
+    // and avoid hitting Spotify's rate limit too hard
+    for (const song of data) {
+        // Construct the URI (Spotify needs the spotify:track:ID format)
+        const trackUri = `spotify:track:${song.id}`;
+        
+        // The Endpoint from your screenshot
+        // The 'uri' must be a query parameter
+        let url = `https://api.spotify.com/v1/me/player/queue?uri=${encodeURIComponent(trackUri)}`;
+        
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                console.log(`Added to queue: ${song.name}`);
+            } else if (response.status === 429) {
+                console.warn("Rate limited! Waiting a moment...");
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            } else {
+                const errorData = await response.json();
+                console.error(`Failed to add ${song.name}:`, errorData);
+            }
+        } catch (error) {
+            console.error("Network error adding to queue:", error);
+        }
+        
+        // Small delay between calls to be safe
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
 }
 
 const init = async () => {
