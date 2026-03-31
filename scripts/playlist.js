@@ -206,12 +206,12 @@ function weightedRandomShuffel(data){
         data = JSON.parse(data);
     }
 
-    dataGroup0 = []
-    dataGroup1 = []
-    dataGroup2 = []
-    dataGroup3 = []
-    dataGroup4 = []
-    queue = []
+    let dataGroup0 = []
+    let dataGroup1 = []
+    let dataGroup2 = []
+    let dataGroup3 = []
+    let dataGroup4 = []
+    let queue = []
     
     data.forEach(song => {
         const group = song.index % 5;
