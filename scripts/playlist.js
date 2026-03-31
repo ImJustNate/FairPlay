@@ -136,14 +136,21 @@ async function loadSongs(playlistId, accessToken) {
         tracks.forEach((entry, index) => { 
             if (entry && entry.item) {
                 console.log("creating html")
-                // const trackName = tracks[i].track.name;
                 const trackName = entry.item.name;
-                // const artistName = tracks[i].track.artists[0].name;
                 const artistName = entry.item.artists?.[0]?.name || "Unknown Artist";
+                const albumName = entry.item.album?.[0]?.name || "Unknown Album";
 
                 htmlContent += `
                     <p><strong>${index + 1}.</strong> ${trackName} - ${artistName}</p>
                 `;
+                const trackData = {
+                    id: entry.id,
+                    name: trackName,
+                    artist: artistName,
+                    album: albumName,
+                    weight: 0
+                };
+                localStorage.setItem(`${index}`, JSON.stringify(trackData));
             }
         });
         

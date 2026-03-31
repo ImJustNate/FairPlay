@@ -1,5 +1,6 @@
 
-.main-container {
+.main-container 
+{
     display: flex;
     flex-direction: column; /* Stack login and list vertically */
     align-items: center;
@@ -14,7 +15,8 @@
 }
 
 
-.login-container {
+.login-container 
+{
     width: 100%;
     max-width: 500px;
     height: 450px; 
@@ -27,10 +29,11 @@
 
 }
 
-.music-container {
-    width: 100%;
+.music-container 
+{
+    width: 80%;
     max-width: 500px;
-    height: 450px; /* Force a fixed height to test scroll */
+    height: 50%; /* Force a fixed height to test scroll */
     overflow-y: auto; /* Allow vertical scrolling */
     overflow-x: hidden;
     
@@ -38,17 +41,19 @@
     border: 1px solid #333;
     border-radius: 8px;
     padding: 10px;
-    margin-top: 11rem;
 
+    font-weight: var(--fw-bold);
 }
 
 /* Ensure the list fills the width so the scrollbar stays on the edge */
-#music-list {
+#music-list 
+{
     width: 100%;
     margin: 0;
     padding: 0;
 }
-.playlist-card {
+.playlist-card 
+{
     background: var(--light1);
     color: var(--primary);
     font-size: 1.2em;
@@ -59,13 +64,17 @@
 
     display: flex;
     align-items: center;
+
+    color: black;
 }
 
-.playlist-card:hover {
+.playlist-card:hover 
+{
     cursor: pointer;
 }
 
-.playlist-card img {
+.playlist-card img 
+{
     width: 64px;
     height: 64px;
     margin-right: 1rem;
@@ -74,13 +83,80 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
-.playlist-info strong {
+.playlist-info strong 
+{
     display: block;
     font-size: 1rem;
     margin-bottom: 4px;
 }
 
-.playlist-info small {
+.playlist-info small 
+{
     color: #b3b3b3;
+}
+
+#playlist-tracks 
+{
+    width: 80%;
+    max-width: 500px;
+    height: 50%; 
+    background: var(--accent1);
+    overflow-y: auto; 
+    overflow-x: hidden;
+
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px; 
+}
+#playlist-tracks p 
+{
+    background: var(--light1);
+    margin: 0.7em;
+    padding: 0.5em;
+    border-radius: 8px;
+    
+    font-weight: var(--fw-bold);
+}
+
+@media screen and (min-width: 900px)
+{
+    .main-container
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    /* #playlist-tracks
+    {
+        margin-top: 4em;
+    } */
+}
+
+@media screen and (max-width: 899px)
+{
+    .music-container
+    {
+        margin-top: 10em;
+        margin-bottom: 2em;
+    }
+
+    #playlist-tracks
+    {
+        margin-bottom: 2em;
+    }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1300px)
+{
+    #loginBtn
+    {
+        display: none;
+    }
+    .music-container
+    {
+        margin-right: 1em;
+    }
+    
 }
 

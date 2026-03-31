@@ -1,4 +1,5 @@
-.hero {
+.hero 
+{
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -13,7 +14,8 @@
     -webkit-backdrop-filter: blur(20px);  /* Safari support */  
 }
 
-.hero-header {
+.hero-header 
+{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,36 +33,19 @@
     text-align: center;
 }
 
-.icon {
+.icon 
+{
     height: 4rem;
     width: auto;
 }
 
-footer {
-    display: flex;
-    align-self: center;
-    
-    width: 90%;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-footer a {
-    text-decoration: none;
-    color: grey;
-    padding: 0 1rem;
-}
-
-
-.slide-out-left {
+.slide-out-left 
+{
   animation: slideOut 0.6s ease forwards;
 }
 
-@keyframes slideOut {
+@keyframes slideOut 
+{
   from {
     transform: translateX(0);
     opacity: 1;
@@ -88,21 +73,26 @@ footer a {
     text-shadow: 0px 4px 6px rgba(0,0,0,0.3);
 }
 
-@media screen and (max-width: 800px) {
-    .nav-opts {
+@media screen and (max-width: 800px) 
+{
+    .nav-opts 
+    {
         font-size: 10px;
         font-weight: normal;
         text-decoration: none;
     }
-    .login-nav {
+    .login-nav 
+    {
         font-size: 10px;
         font-weight: normal;
         text-decoration: none;
     }
-    main {
+    main 
+    {
         width: 100%;
     }
-    .hero {
+    .hero 
+    {
         margin: 1rem;
     }
     .welcomeLogin
