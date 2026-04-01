@@ -163,7 +163,7 @@ async function loadSongs(playlistId, accessToken) {
                 `;
                 const trackData = {
                     index: index,
-                    id: entry.id,
+                    id: entry.item.id,
                     name: trackName,
                     artist: artistName,
                     album: albumName,
