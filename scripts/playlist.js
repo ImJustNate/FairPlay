@@ -327,7 +327,7 @@ async function addToQueue(data, accessToken) {
         }
         
         // Small delay between calls to be safe
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, 10));
     }
 }
 
