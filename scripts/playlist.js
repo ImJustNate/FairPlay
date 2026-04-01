@@ -179,7 +179,7 @@ async function loadSongs(playlistId, accessToken) {
 
         container.innerHTML = htmlContent || "<p>No tracks found.</p>";
 
-        let shuffled = weightedRandomShuffel(cachedPlaylist, playlistId)
+        let shuffled = weightedRandomShuffel(tracksData, playlistId, true)
         await addToQueue(shuffled, accessToken);
         return;
 
