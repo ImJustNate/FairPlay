@@ -295,12 +295,13 @@ async function addToQueue(data, accessToken) {
     // We use a for...of loop for async/await to ensure order 
     // and avoid hitting Spotify's rate limit too hard
     for (const song of data) {
+         console.log(song)
+         console.log(song.id)
         // Construct the URI (Spotify needs the spotify:track:ID format)
-        const trackUri = `spotify:track:${song.id}`;
-        
+        const trackId = `spotify:track:${song.id}`;
         // The Endpoint from your screenshot
         // The 'uri' must be a query parameter
-        let url = `https://api.spotify.com/v1/me/player/queue?uri=${encodeURIComponent(trackUri)}`;
+        let url = `https://api.spotify.com/v1/me/player/queue?uri=${encodeURIComponent(trackId)}`;
         
 
         try {
