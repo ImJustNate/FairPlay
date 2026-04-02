@@ -145,10 +145,13 @@ async function loadSongs(playlistId, accessToken) {
 
             const shuffleButton = document.querySelector("#shuffle");
 
-            shuffleButton.onclick = () => {
-                addToQueue(shuffled, accessToken);
-            };
-
+            if (shuffleButton) {
+                shuffleButton.onclick = () => {
+                    addToQueue(shuffled, accessToken);
+                };
+            } else {
+                console.error("Shuffle button not found in the DOM!");
+}
             return; 
         }
 
@@ -198,12 +201,16 @@ async function loadSongs(playlistId, accessToken) {
         container.innerHTML = htmlContent || "<p>No tracks found.</p>";
 
         let shuffled = weightedRandomShuffel(tracksData, playlistId, true)
+        
         const shuffleButton = document.querySelector("#shuffle");
 
-        shuffleButton.onclick = () => {
-            addToQueue(shuffled, accessToken);
-        };
-        return;
+        if (shuffleButton) {
+            shuffleButton.onclick = () => {
+                addToQueue(shuffled, accessToken);
+            };
+        } else {
+            console.error("Shuffle button not found in the DOM!");
+        }
 
     } catch (error) {
         console.error("Failed to load tracks:", error);
@@ -212,7 +219,7 @@ async function loadSongs(playlistId, accessToken) {
 }
 
 
-const renderPlaylists = (playlists, token) => {
+const renderPlaylists = async (playlists, token) => {
     // FIX: Define the container here so it's available to the code below
     const container = document.getElementById('music-list'); 
     
@@ -222,19 +229,21 @@ const renderPlaylists = (playlists, token) => {
     }
 
     container.innerHTML = ''; // Clear existing content
-    const me = getMyUserId(token)
+    const me = await getMyUserId(token)
     console.log("Renderplaylist function");
     console.log(me);
 
 
     playlists.forEach(playlist => {
-        const playlistEl = document.createElement('div');
-        playlistEl.classList.add('playlist-card');
-        
-        playlistEl.innerHTML = `
-            <img src="${playlist.images[0]?.url || ''}" alt="${playlist.name}">
-            <p>${playlist.name}</p>
-        `;
+        if (playlist.items.owner.id == me) {
+            const playlistEl = document.createElement('div');
+            playlistEl.classList.add('playlist-card');
+
+            playlistEl.innerHTML = `
+                <img src="${playlist.images[0]?.url || ''}" alt="${playlist.name}">
+                <p>${playlist.name}</p>
+            `;
+        }
 
         playlistEl.addEventListener('click', () => {
             const token = localStorage.getItem('access_token')
