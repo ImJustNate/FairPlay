@@ -235,7 +235,7 @@ const renderPlaylists = async (playlists, token) => {
 
 
     playlists.forEach(playlist => {
-        if (playlist.items.owner.id == me) {
+        if (playlist.owner.id == me) {
             const playlistEl = document.createElement('div');
             playlistEl.classList.add('playlist-card');
 
