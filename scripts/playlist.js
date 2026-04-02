@@ -82,6 +82,18 @@ async function getAccessToken(code) {
     return await response.json();
 }
 
+// To get my ID
+async function getMyUserId(token) {
+    const response = await fetch('https://api.spotify.com/v1/me', {
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await response.json();
+    console.log("getMyUserId function")
+    console.log(data)
+    console.log(data.id)
+    return data.id;
+}
+
 async function fetchPlaylists(token) {
     const response = await fetch('https://api.spotify.com/v1/me/playlists', {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -130,7 +142,13 @@ async function loadSongs(playlistId, accessToken) {
             container.innerHTML = htmlContent;
 
             let shuffled = weightedRandomShuffel(cachedPlaylist, playlistId)
-            await addToQueue(shuffled, accessToken);
+
+            const shuffleButton = document.querySelector("#shuffle");
+
+            shuffleButton.onclick = () => {
+                addToQueue(shuffled, accessToken);
+            };
+
             return; 
         }
 
@@ -180,7 +198,11 @@ async function loadSongs(playlistId, accessToken) {
         container.innerHTML = htmlContent || "<p>No tracks found.</p>";
 
         let shuffled = weightedRandomShuffel(tracksData, playlistId, true)
-        await addToQueue(shuffled, accessToken);
+        const shuffleButton = document.querySelector("#shuffle");
+
+        shuffleButton.onclick = () => {
+            addToQueue(shuffled, accessToken);
+        };
         return;
 
     } catch (error) {
@@ -200,6 +222,10 @@ const renderPlaylists = (playlists, token) => {
     }
 
     container.innerHTML = ''; // Clear existing content
+    const me = getMyUserId(token)
+    console.log("Renderplaylist function");
+    console.log(me);
+
 
     playlists.forEach(playlist => {
         const playlistEl = document.createElement('div');
