@@ -243,7 +243,7 @@ const renderPlaylists = async (playlists, token) => {
                 <img src="${playlist.images[0]?.url || ''}" alt="${playlist.name}">
                 <p>${playlist.name}</p>
             `;
-        }
+        
 
         playlistEl.addEventListener('click', () => {
             const token = localStorage.getItem('access_token')
@@ -251,7 +251,7 @@ const renderPlaylists = async (playlists, token) => {
             loadSongs(playlist.id, token);
         });
         container.appendChild(playlistEl); 
-    });
+    }});
 };
 
 function weightedRandomShuffel(data, playlistId, firstTime = false){
