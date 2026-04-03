@@ -135,7 +135,7 @@ async function loadSongs(playlistId, accessToken) {
             console.log("Loading playlist from local storage...");
             const cachedTracks = JSON.parse(cachedPlaylist);
             
-            let htmlContent = "";
+            let htmlContent = `<button id="shuffle">Shuffle and Add to Queue</button>`;
             cachedTracks.forEach((track, index) => {
                 htmlContent += `<p><strong>${index + 1}.</strong> ${track.name} - ${track.artist}</p>`;
             });
@@ -169,7 +169,7 @@ async function loadSongs(playlistId, accessToken) {
         }
 
         // Build the HTML string first
-        let htmlContent = "";
+        let htmlContent = `<button id="shuffle">Shuffle and Add to Queue</button>`;
         const tracksData = []; 
         console.log(tracks)
         tracks.forEach((entry, index) => { 
