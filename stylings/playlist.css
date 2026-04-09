@@ -135,6 +135,7 @@
     position: relative;
     overflow: hidden; /* Prevents scrollbars during animation */
     padding: 20px;
+    flex-direction: row;
     }
     .music-container {
     position: relative;
@@ -143,6 +144,7 @@
     border-radius: 8px;
     min-width: 350px;
     box-shadow: 5px 0 15px rgba(0,0,0,0.1); 
+    margin-top: 15em;
     }
 
     #playlist-tracks {

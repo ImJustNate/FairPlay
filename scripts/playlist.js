@@ -124,6 +124,7 @@ async function loadSongs(playlistId, accessToken) {
     let container = document.getElementById('playlist-tracks');
     if (!container) return;
     container.classList.remove('is-visible');
+    void container.offsetWidth;
     let tracks = [];
     // Note: Ensure the URL uses the correct backticks for the variable template
     let nextUrl = `https://api.spotify.com/v1/playlists/${playlistId}/items?limit=100`;
@@ -200,9 +201,10 @@ async function loadSongs(playlistId, accessToken) {
         console.log(htmlContent)
 
         container.innerHTML = htmlContent || "<p>No tracks found.</p>";
-        setTimeout(() => {
+
+        requestAnimationFrame(() => {
             container.classList.add('is-visible');
-        }, 10);
+        });
 
         let shuffled = weightedRandomShuffel(tracksData, playlistId, true)
         
