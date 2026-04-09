@@ -160,13 +160,14 @@
     padding: 20px;
     min-width: 350px;
     min-height: 400px;
-    margin-left: -400px;
+    margin-left: -350px;
+    margin-top: 15em;
     }
 
     #playlist-tracks.is-visible {
         opacity: 1;
-        transform: translateX(0); /* Move to its natural flex position */
-        margin-left: 20px;
+        pointer-events: auto;
+        transform: translateX(370px); /* Move to its natural flex position */
     }
 }
 
