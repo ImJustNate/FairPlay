@@ -132,7 +132,7 @@
     flex-direction: row;
     justify-content: center; /* Keeps things centered initially */
     align-items: flex-start;
-    gap: 0px;
+    gap: 20px;
     /* position: relative; */
     overflow: hidden; /* Prevents scrollbars during animation */
     padding: 20px;
@@ -152,22 +152,22 @@
     position: relative;
     z-index: 1; /* Sits behind the playlists */
     opacity: 0;
-    transform: translateX(-100%); 
-    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease, margin-left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateX(-50px); 
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
     
     background: var(--light1);
     border-radius: 8px;
     padding: 20px;
     min-width: 350px;
     min-height: 400px;
-    margin-left: -350px;
     margin-top: 15em;
+    pointer-events: none;
     }
 
     #playlist-tracks.is-visible {
         opacity: 1;
         pointer-events: auto;
-        transform: translateX(370px); /* Move to its natural flex position */
+        transform: translateX(0); /* Move to its natural flex position */
     }
 }
 
