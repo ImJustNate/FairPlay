@@ -120,17 +120,49 @@
 
 @media screen and (min-width: 900px)
 {
-    .main-container
+    /* .main-container
     {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
-    }
-    /* #playlist-tracks
-    {
-        margin-top: 4em;
     } */
+    .main-container {
+    display: flex;
+    justify-content: center; /* Keeps things centered initially */
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    overflow: hidden; /* Prevents scrollbars during animation */
+    padding: 20px;
+    }
+    .music-container {
+    position: relative;
+    z-index: 2; 
+    background: var(--light1); 
+    border-radius: 8px;
+    min-width: 350px;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1); 
+    }
+
+    #playlist-tracks {
+    position: relative;
+    z-index: 1; /* Sits behind the playlists */
+    opacity: 0;
+    transform: translateX(-100%); 
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+    
+    background: var(--light1);
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 350px;
+    min-height: 400px;
+    }
+
+    #playlist-tracks.is-visible {
+        opacity: 1;
+        transform: translateX(0); /* Move to its natural flex position */
+    }
 }
 
 @media screen and (max-width: 899px)
@@ -157,6 +189,22 @@
     {
         margin-right: 1em;
     }
+    
+}
+
+footer {
+    width: 89%;
+    margin-top: -1em;
+}
+
+#shuffle {
+    font-weight: bolder;
+    margin-left: 0.8em;;
+    border-radius: 8px;
+    border: black solid 2px;
+    padding: 0.5em;
+    font-size: 1em;
+    background: var(--light1)
     
 }
 
