@@ -141,7 +141,6 @@
     .music-container {
     position: relative;
     z-index: 2; 
-    background: var(--light1); 
     border-radius: 8px;
     min-width: 350px;
     box-shadow: 5px 0 15px rgba(0,0,0,0.1); 
@@ -155,13 +154,12 @@
     transform: translateX(-50px); 
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
     
-    background: var(--light1);
     border-radius: 8px;
     padding: 20px;
     min-width: 350px;
-    min-height: 400px;
     margin-top: 15em;
     pointer-events: none;
+    max-height: 380px;
     }
 
     #playlist-tracks.is-visible {
